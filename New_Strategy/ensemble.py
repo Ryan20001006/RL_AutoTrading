@@ -163,16 +163,18 @@ class StockEnvTrain(gym.Env):
             return self._obs(), 0.0, True, False, {}
         prices  = self.df.loc[self.day].adjcp.values
         begin   = self.balance + float(np.dot(prices, self.shares))
-        actions = actions * HMAX_NORMALIZE
-        idx     = np.argsort(actions)
+        dollar_per_slot = begin / STOCK_DIM
+        idx = np.argsort(actions)
         for i in idx[actions[idx] < 0]:
-            qty = min(abs(actions[i]), self.shares[i])
+            qty = min(int(abs(actions[i]) * dollar_per_slot / prices[i]),
+                      int(self.shares[i]))
             if qty > 0:
                 self.balance += prices[i] * qty * (1 - TRANSACTION_FEE)
                 self.shares[i] -= qty
         for i in idx[::-1][actions[idx[::-1]] > 0]:
             if prices[i] <= 0: continue
-            qty = min(int(self.balance // prices[i]), int(actions[i]))
+            qty = min(int(actions[i] * dollar_per_slot / prices[i]),
+                      int(self.balance // prices[i]))
             if qty > 0:
                 self.balance -= prices[i] * qty * (1 + TRANSACTION_FEE)
                 self.shares[i] += qty
@@ -214,16 +216,19 @@ class StockEnvValidation(gym.Env):
         if self.day >= len(self.df.index.unique()) - 1:
             return self._obs(), 0.0, True, False, {}
         prices  = self.df.loc[self.day].adjcp.values
-        actions = actions * HMAX_NORMALIZE
-        idx     = np.argsort(actions)
+        portfolio_value = self.balance + float(np.dot(prices, self.shares))
+        dollar_per_slot = portfolio_value / STOCK_DIM
+        idx = np.argsort(actions)
         for i in idx[actions[idx] < 0]:
-            qty = min(abs(actions[i]), self.shares[i])
+            qty = min(int(abs(actions[i]) * dollar_per_slot / prices[i]),
+                      int(self.shares[i]))
             if qty > 0:
                 self.balance += prices[i] * qty * (1 - TRANSACTION_FEE)
                 self.shares[i] -= qty
         for i in idx[::-1][actions[idx[::-1]] > 0]:
             if prices[i] <= 0: continue
-            qty = min(int(self.balance // prices[i]), int(actions[i]))
+            qty = min(int(actions[i] * dollar_per_slot / prices[i]),
+                      int(self.balance // prices[i]))
             if qty > 0:
                 self.balance -= prices[i] * qty * (1 + TRANSACTION_FEE)
                 self.shares[i] += qty
@@ -282,16 +287,19 @@ class StockEnvTrade(gym.Env):
                     self.balance += prices[i] * self.shares[i] * (1 - TRANSACTION_FEE)
                     self.shares[i] = 0
         else:
-            actions = actions * HMAX_NORMALIZE
-            idx     = np.argsort(actions)
+            portfolio_value = self.balance + float(np.dot(prices, self.shares))
+            dollar_per_slot = portfolio_value / STOCK_DIM
+            idx = np.argsort(actions)
             for i in idx[actions[idx] < 0]:
-                qty = min(abs(actions[i]), self.shares[i])
+                qty = min(int(abs(actions[i]) * dollar_per_slot / prices[i]),
+                          int(self.shares[i]))
                 if qty > 0:
                     self.balance += prices[i] * qty * (1 - TRANSACTION_FEE)
                     self.shares[i] -= qty
             for i in idx[::-1][actions[idx[::-1]] > 0]:
                 if prices[i] <= 0: continue
-                qty = min(int(self.balance // prices[i]), int(actions[i]))
+                qty = min(int(actions[i] * dollar_per_slot / prices[i]),
+                          int(self.balance // prices[i]))
                 if qty > 0:
                     self.balance -= prices[i] * qty * (1 + TRANSACTION_FEE)
                     self.shares[i] += qty
@@ -391,7 +399,7 @@ def run_strategy(df: pd.DataFrame, top30: pd.DataFrame):
             continue
 
         turb_series = compute_turbulence(train_df_full)
-        turb_thresh = float(np.percentile(turb_series, 90))
+        turb_thresh = float(np.percentile(turb_series, 75))
         print(f"  turb threshold: {turb_thresh:.1f}")
 
         # ── 3. Validation window (63 days before trade start) ─────────────
@@ -422,7 +430,7 @@ def run_strategy(df: pd.DataFrame, top30: pd.DataFrame):
         # ── 5. Train all three agents ─────────────────────────────────────
         models, sharpes = {}, {}
         for agent in ["A2C", "PPO", "DDPG"]:
-            ts = {"A2C": 30_000, "PPO": 100_000, "DDPG": 10_000}[agent]
+            ts = {"A2C": 30_000, "PPO": 100_000, "DDPG": 5_000}[agent]
             models[agent]  = train_agent(agent, train_df, timesteps=ts)
             sharpes[agent] = validate_agent(models[agent], val_df)
 
