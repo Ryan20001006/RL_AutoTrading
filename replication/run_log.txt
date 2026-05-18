@@ -1,0 +1,252 @@
+Loading pre-processed data …
+  shape: (87780, 12)   columns: ['datadate', 'tic', 'adjcp', 'open', 'high', 'low', 'volume', 'macd', 'rsi', 'cci', 'adx', 'turbulence']
+Out-of-sample window: 20151002 – 20200708, 1199 dates
+In-sample 90th-pct turbulence threshold: 96.08
+
+============================================================
+  ENSEMBLE STRATEGY — quarterly rolling rebalance
+============================================================
+
+[Quarter 1]  (iteration index i=126, initial=True)
+  turbulence threshold: 171.1
+  train …→20151002 | val 20151002→20160104 | trade 20160104→20160405
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.0369
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.0447
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.0924
+  → Selected: DDPG  (Sharpe 0.0924)
+
+[Quarter 2]  (iteration index i=189, initial=False)
+  turbulence threshold: 96.1
+  train …→20160104 | val 20160104→20160405 | trade 20160405→20160705
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.1129
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.2272
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.0001
+  → Selected: PPO  (Sharpe 0.2272)
+
+[Quarter 3]  (iteration index i=252, initial=False)
+  turbulence threshold: 171.1
+  train …→20160405 | val 20160405→20160705 | trade 20160705→20161003
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: -0.0427
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.0289
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.0617
+  → Selected: DDPG  (Sharpe 0.0617)
+
+[Quarter 4]  (iteration index i=315, initial=False)
+  turbulence threshold: 171.1
+  train …→20160705 | val 20160705→20161003 | trade 20161003→20170103
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: -0.0561
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.0099
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.0167
+  → Selected: DDPG  (Sharpe 0.0167)
+
+[Quarter 5]  (iteration index i=378, initial=False)
+  turbulence threshold: 171.1
+  train …→20161003 | val 20161003→20170103 | trade 20170103→20170404
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.4101
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.4448
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.2655
+  → Selected: PPO  (Sharpe 0.4448)
+
+[Quarter 6]  (iteration index i=441, initial=False)
+  turbulence threshold: 96.1
+  train …→20170103 | val 20170103→20170404 | trade 20170404→20170705
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.2869
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.4101
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.1940
+  → Selected: PPO  (Sharpe 0.4101)
+
+[Quarter 7]  (iteration index i=504, initial=False)
+  turbulence threshold: 171.1
+  train …→20170404 | val 20170404→20170705 | trade 20170705→20171003
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.0054
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: 0.2778
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.1194
+  → Selected: PPO  (Sharpe 0.2778)
+
+[Quarter 8]  (iteration index i=567, initial=False)
+  turbulence threshold: 171.1
+  train …→20170705 | val 20170705→20171003 | trade 20171003→20180103
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.4970
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.4577
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.5404
+  → Selected: DDPG  (Sharpe 0.5404)
+
+[Quarter 9]  (iteration index i=630, initial=False)
+  turbulence threshold: 96.1
+  train …→20171003 | val 20171003→20180103 | trade 20180103→20180405
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.3047
+    PPO  trained  (0.8 min)
+    PPO  val Sharpe: 0.3328
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.1797
+  → Selected: PPO  (Sharpe 0.3328)
+
+[Quarter 10]  (iteration index i=693, initial=False)
+  turbulence threshold: 96.1
+  train …→20180103 | val 20180103→20180405 | trade 20180405→20180705
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: -0.0694
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: 0.0594
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: -0.0033
+  → Selected: PPO  (Sharpe 0.0594)
+
+[Quarter 11]  (iteration index i=756, initial=False)
+  turbulence threshold: 96.1
+  train …→20180405 | val 20180405→20180705 | trade 20180705→20181003
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: -0.2486
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: -0.1104
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: -0.0081
+  → Selected: DDPG  (Sharpe -0.0081)
+
+[Quarter 12]  (iteration index i=819, initial=False)
+  turbulence threshold: 96.1
+  train …→20180705 | val 20180705→20181003 | trade 20181003→20190104
+    A2C  trained  (0.3 min)
+    A2C  val Sharpe: 0.2452
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: 0.3463
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.2677
+  → Selected: PPO  (Sharpe 0.3463)
+
+[Quarter 13]  (iteration index i=882, initial=False)
+  turbulence threshold: 171.1
+  train …→20181003 | val 20181003→20190104 | trade 20190104→20190405
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: -0.3097
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: -0.4362
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: -0.3107
+  → Selected: A2C  (Sharpe -0.3097)
+
+[Quarter 14]  (iteration index i=945, initial=False)
+  turbulence threshold: 96.1
+  train …→20190104 | val 20190104→20190405 | trade 20190405→20190708
+    A2C  trained  (0.2 min)
+    A2C  val Sharpe: 0.2060
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: 0.1745
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.1649
+  → Selected: A2C  (Sharpe 0.2060)
+
+[Quarter 15]  (iteration index i=1008, initial=False)
+  turbulence threshold: 96.1
+  train …→20190405 | val 20190405→20190708 | trade 20190708→20191004
+    A2C  trained  (0.3 min)
+    A2C  val Sharpe: 0.0215
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: 0.4105
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: -0.0479
+  → Selected: PPO  (Sharpe 0.4105)
+
+[Quarter 16]  (iteration index i=1071, initial=False)
+  turbulence threshold: 96.1
+  train …→20190708 | val 20190708→20191004 | trade 20191004→20200106
+    A2C  trained  (0.3 min)
+    A2C  val Sharpe: 0.1872
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: 0.0321
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: 0.1356
+  → Selected: A2C  (Sharpe 0.1872)
+
+[Quarter 17]  (iteration index i=1134, initial=False)
+  turbulence threshold: 96.1
+  train …→20191004 | val 20191004→20200106 | trade 20200106→20200406
+    A2C  trained  (0.3 min)
+    A2C  val Sharpe: 0.0293
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: -0.3103
+    DDPG trained  (0.7 min)
+    DDPG val Sharpe: -0.3497
+  → Selected: A2C  (Sharpe 0.0293)
+
+[Quarter 18]  (iteration index i=1197, initial=False)
+  turbulence threshold: 96.1
+  train …→20200106 | val 20200106→20200406 | trade 20200406→20200707
+    A2C  trained  (0.3 min)
+    A2C  val Sharpe: -0.3862
+    PPO  trained  (0.9 min)
+    PPO  val Sharpe: -0.4285
+    DDPG trained  (0.6 min)
+    DDPG val Sharpe: -0.4002
+  → Selected: A2C  (Sharpe -0.3862)
+
+Total elapsed: 30.8 min
+
+── Model selected each quarter ──
+  Q 1: DDPG
+  Q 2: PPO
+  Q 3: DDPG
+  Q 4: DDPG
+  Q 5: PPO
+  Q 6: PPO
+  Q 7: PPO
+  Q 8: DDPG
+  Q 9: PPO
+  Q10: PPO
+  Q11: DDPG
+  Q12: PPO
+  Q13: A2C
+  Q14: A2C
+  Q15: PPO
+  Q16: A2C
+  Q17: A2C
+  Q18: A2C
+
+Portfolio series: 1134 daily observations
+
+── Ensemble Strategy (Replication) ──
+  Cumulative Return : 71.9%
+  Annual Return     : 12.8%
+  Annual Volatility : 8.3%
+  Sharpe Ratio      : 1.55
+  Max Drawdown      : -7.3%
+
+Figure saved → /Users/ryan/Desktop/Financial Analysis and Machine Learning/RL/replication/results/ensemble_replication_results.png
+
+============================================================
+  COMPARISON: Paper (Table 2) vs This Replication
+============================================================
+Metric                         Paper    Replication
+----------------------------------------------------
+Cumulative Return              70.4%          71.9%
+Annual Return                  13.0%          12.8%
+Annual Volatility               9.7%           8.3%
+Sharpe Ratio                    1.30           1.55
+Max Drawdown                   -9.7%          -7.3%
+
+Done.
